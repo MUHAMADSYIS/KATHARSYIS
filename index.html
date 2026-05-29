@@ -15,14 +15,21 @@
   .dark nav button { background: #222; color: white; border-color: #444; }
   section { display:none; padding:15px; }
   .active { display:block; }
-  label { display:block; margin-top:15px; font-weight: bold; font-size:14px; }
-  input, textarea { width:100%; padding:11px; margin-top:5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
-  .dark input, .dark textarea { background: #222; color: white; border-color: #444; }
-  button.btn-main { margin-top: 20px; padding: 12px 20px; background: #007BFF; color: white; border: none; cursor: pointer; border-radius: 4px; width: 100%; font-weight: bold; font-size: 15px; }
+  
+  /* Styling Karya */
+  .karya-item { border-bottom: 1px dashed #ccc; padding: 15px 0; }
+  .dark .karya-item { border-color: #444; }
+  .karya-item h3 { margin: 0 0 8px 0; font-size: 18px; color: #007BFF; }
+  .dark .karya-item h3 { color: #399cff; }
+  .karya-item p { margin: 0; line-height: 1.6; }
+
   #profilePanel { position:fixed; top:0; right:-100%; width:85%; max-width: 400px; height:100%; background:white; transition:0.3s ease-in-out; z-index:999; box-shadow:-5px 0 15px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
   #profilePanel.active { right:0; }
   .dark #profilePanel { background:#1e1e1e; color:white; }
-  #panelHeaderBox { height:150px; background:#ccc; background-size:cover; background-position:center; width: 100%; }
+  
+  /* Background Sampul Profil */
+  #panelHeaderBox { height:150px; background:#007BFF; background-size:cover; background-position:center; width: 100%; }
+  
   .profileInfoContainer { display: flex; align-items: flex-end; gap: 15px; padding: 0 15px; margin-top: -40px; position: relative; z-index: 2; }
   #panelFotoProfil { width: 90px; height: 90px; border-radius: 50%; background: #aaa; border: 3px solid white; object-fit: cover; flex-shrink: 0; }
   .dark #panelFotoProfil { border: 3px solid #1e1e1e; }
@@ -31,17 +38,15 @@
   .dark .profileText h3 { color: #fff; }
   .profileText p { margin: 0; color: #666; font-size: 14px; word-break: break-word; }
   .dark .profileText p { color: #ccc; }
+  
   #gallery { display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
   #gallery img { width: 100%; height: 100px; object-fit: cover; border-radius: 4px; }
-  .timeline { display:flex; overflow-x:auto; padding: 10px 0; }
-  .timeline .item { min-width:200px; border:1px solid gray; margin-right:10px; padding:10px; border-radius: 6px; }
-  .timeline .item img { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1 id="title" onclick="editTitle()" style="cursor:pointer;">KATHARSYIS</h1>
+  <h1>KATHARSYIS</h1>
   <button onclick="toggleMode()" style="background:none; border:none; font-size:20px; cursor:pointer;">🌙</button>
 </header>
 
@@ -51,61 +56,70 @@
   <button onclick="show('opini')">Opini</button>
   <button onclick="show('sastra')">Sastra</button>
   <button onclick="show('galeri')">Galeri</button>
-  <button onclick="show('timeline')">Timeline</button>
 </nav>
 
+<!-- HALAMAN UTAMA (WELCOME) -->
 <section id="home" class="active">
-  <h2>Edit Profil</h2>
-  <label>Header / Sampul</label>
-  <input type="file" id="inputHeader" onchange="prosesHeaderLansung(this)">
-  <label>Foto Profil</label>
-  <input type="file" id="inputFoto" onchange="prosesFotoLangsung(this)">
-  <label>Nama</label>
-  <input id="namaUser" placeholder="Nama kamu" oninput="updateNamaLangsung()">
-  <label>Bio</label>
-  <textarea id="bioUser" placeholder="Ceritakan tentang kamu" oninput="updateBioLangsung()"></textarea>
-  <button class="btn-main" onclick="openProfile()">Lihat & Simpan Profil</button>
+  <h2>Selamat Datang di KATHARSYIS</h2>
+  <p>Ini adalah ruang digital tempat saya membagikan isi pikiran, opini, dan karya sastra. Silakan buka menu di atas untuk mulai membaca dan melihat-lihat karya saya.</p>
 </section>
 
+<!-- HALAMAN OPINI -->
 <section id="opini">
   <h2>Opini</h2>
-  <input id="opiniTitle" placeholder="Judul Opini">
-  <textarea id="opiniText" placeholder="Tulis opini kamu di sini..."></textarea>
-  <button class="btn-main" onclick="postOpini()" style="width:auto;">POST KARYA</button>
-  <div id="opiniList" style="margin-top:20px;"></div>
+  <div id="opiniList">
+    
+    <!-- CONTOH CARA NULIS OPINI (Kamu bisa tambah/ganti di bawah sini) -->
+    <div class="karya-item">
+      <h3>Judul Opini Pertama Kamu</h3>
+      <p>Tulis paragraf opini kamu di sini secara langsung. Robot Google akan langsung bisa membaca tulisan ini dan orang lain yang datang hanya bisa membacanya tanpa bisa mengedit.</p>
+    </div>
+
+    <div class="karya-item">
+      <h3>Dunia Digital Masa Kini</h3>
+      <p>Ini contoh opini kedua. Kamu bebas menulis sepanjang apa pun di dalam tag p ini.</p>
+    </div>
+    <!-- Batas Contoh Opini -->
+
+  </div>
 </section>
 
+<!-- HALAMAN SASTRA -->
 <section id="sastra">
   <h2>Sastra</h2>
-  <input id="sastraTitle" placeholder="Judul Sastra">
-  <textarea id="sastraText" placeholder="Tulis sastra di sini..."></textarea>
-  <button class="btn-main" onclick="postSastra()" style="width:auto;">POST KARYA</button>
-  <div id="sastraList" style="margin-top:20px;"></div>
+  <div id="sastraList">
+    
+    <!-- CONTOH CARA NULIS SASTRA (Kamu bisa tambah/ganti di bawah sini) -->
+    <div class="karya-item">
+      <h3>Puisi: Katarsis Jiwa</h3>
+      <p>Tulis puisi, cerpen, atau prosa kamu di sini...<br>
+      Gunakan kode &lt;br&gt; jika ingin membuat baris baru ke bawah.</p>
+    </div>
+    <!-- Batas Contoh Sastra -->
+
+  </div>
 </section>
 
+<!-- HALAMAN GALERI -->
 <section id="galeri">
   <h2>Galeri</h2>
-  <input type="file" onchange="uploadFoto(event)">
-  <div id="gallery"></div>
+  <div id="gallery">
+    <!-- Kalau mau pajang foto, masukkan di sini. Contoh: <img src="namafoto.jpg"> -->
+    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%23ccc'/><text x='10' y='50' fill='%23666'>Foto 1</text></svg>">
+  </div>
 </section>
 
-<section id="timeline">
-  <h2>Timeline</h2>
-  <input type="file" id="fotoTL">
-  <input id="tgl" placeholder="Tanggal">
-  <input id="tempat" placeholder="Tempat">
-  <textarea id="desc" placeholder="Cerita momen..."></textarea>
-  <button class="btn-main" onclick="addTimeline()" style="width:auto;">Tambah Momen</button>
-  <div class="timeline" id="timelineList"></div>
-</section>
-
+<!-- PANEL PROFIL (TAMPILAN SAAT TOMBOL PROFIL DIKLIK) -->
 <div id="profilePanel">
   <div id="panelHeaderBox"></div>
   <div class="profileInfoContainer">
-    <img id="panelFotoProfil" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><rect width='80' height='80' fill='%23aaa'/></svg>">
+    <!-- Foto Profil Bawaan -->
+    <img id="panelFotoProfil" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><rect width='80' height='80' fill='%23007BFF'/></svg>">
     <div class="profileText">
-      <h3 id="namaPreview">Belum diatur</h3>
-      <p id="bioPreview">Belum ada deskripsi.</p>
+      <!-- GANTI NAMA KAMU DI SINI -->
+      <h3>Syis</h3>
+      <!-- GANTI BIO KAMU DI SINI -->
+      <p>Pemilik ruang literasi KATHARSYIS.</p>
     </div>
   </div>
   <div style="padding: 20px 15px; margin-top: auto;">
@@ -115,21 +129,6 @@
 
 <script>
 window.onload = function() {
-  if(localStorage.getItem("webTitle")) document.getElementById("title").innerText = localStorage.getItem("webTitle");
-  if(localStorage.getItem("nama")) {
-    document.getElementById("namaPreview").innerText = localStorage.getItem("nama");
-    document.getElementById("namaUser").value = localStorage.getItem("nama");
-  }
-  if(localStorage.getItem("bio")) {
-    document.getElementById("bioPreview").innerText = localStorage.getItem("bio");
-    document.getElementById("bioUser").value = localStorage.getItem("bio");
-  }
-  if(localStorage.getItem("headerImg")) document.getElementById("panelHeaderBox").style.backgroundImage = "url(" + localStorage.getItem("headerImg") + ")";
-  if(localStorage.getItem("profilImg")) document.getElementById("panelFotoProfil").src = localStorage.getItem("profilImg");
-  if(localStorage.getItem("opiniHTML")) document.getElementById("opiniList").innerHTML = localStorage.getItem("opiniHTML");
-  if(localStorage.getItem("sastraHTML")) document.getElementById("sastraList").innerHTML = localStorage.getItem("sastraHTML");
-  if(localStorage.getItem("galeriHTML")) document.getElementById("gallery").innerHTML = localStorage.getItem("galeriHTML");
-  if(localStorage.getItem("timelineHTML")) document.getElementById("timelineList").innerHTML = localStorage.getItem("timelineHTML");
   if(localStorage.getItem("darkMode") === "true") document.body.classList.add("dark");
 };
 
@@ -144,14 +143,6 @@ function toggleMode(){
   localStorage.setItem("darkMode", document.body.classList.contains("dark"));
 }
 
-function editTitle(){ 
-  let t = prompt("Ganti nama website:"); 
-  if(t) {
-    document.getElementById("title").innerText = t; 
-    localStorage.setItem("webTitle", t);
-  }
-}
-
 function openProfile(){ 
   document.getElementById("profilePanel").classList.add("active"); 
 }
@@ -159,95 +150,7 @@ function openProfile(){
 function closeProfile(){ 
   document.getElementById("profilePanel").classList.remove("active"); 
 }
-
-function masukkanKeGaleri(base64Data) {
-  let img = document.createElement("img");
-  img.src = base64Data;
-  document.getElementById("gallery").prepend(img);
-  localStorage.setItem("galeriHTML", document.getElementById("gallery").innerHTML);
-}
-
-function updateNamaLangsung() {
-  let v = document.getElementById("namaUser").value;
-  document.getElementById("namaPreview").innerText = v || "Tanpa Nama";
-  localStorage.setItem("nama", v);
-}
-
-function updateBioLangsung() {
-  let v = document.getElementById("bioUser").value;
-  document.getElementById("bioPreview").innerText = v || "Belum ada deskripsi.";
-  localStorage.setItem("bio", v);
-}
-
-function prosesHeaderLansung(input) {
-  if (input.files && input.files[0]) {
-    let reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById("panelHeaderBox").style.backgroundImage = "url(" + e.target.result + ")";
-      localStorage.setItem("headerImg", e.target.result);
-      masukkanKeGaleri(e.target.result);
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-function prosesFotoLangsung(input) {
-  if (input.files && input.files[0]) {
-    let reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById("panelFotoProfil").src = e.target.result;
-      localStorage.setItem("profilImg", e.target.result);
-      masukkanKeGaleri(e.target.result);
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-function postOpini(){
-  let j = document.getElementById("opiniTitle"); let t = document.getElementById("opiniText");
-  if(!j.value || !t.value) return alert("Isi judul dan teks opini terlebih dahulu!");
-  let d = document.createElement("div"); d.style.borderBottom = "1px dashed #ccc"; d.style.padding = "10px 0";
-  d.innerHTML = "<h3>" + j.value + "</h3><p>" + t.value + "</p>";
-  document.getElementById("opiniList").prepend(d); 
-  localStorage.setItem("opiniHTML", document.getElementById("opiniList").innerHTML);
-  j.value=""; t.value="";
-  alert("Opini berhasil di-post!");
-}
-
-function postSastra(){
-  let j = document.getElementById("sastraTitle"); let t = document.getElementById("sastraText");
-  if(!j.value || !t.value) return alert("Isi judul dan teks sastra terlebih dahulu!");
-  let d = document.createElement("div"); d.style.borderBottom = "1px dashed #ccc"; d.style.padding = "10px 0";
-  d.innerHTML = "<h3>" + j.value + "</h3><p>" + t.value + "</p>";
-  document.getElementById("sastraList").prepend(d); 
-  localStorage.setItem("sastraHTML", document.getElementById("sastraList").innerHTML);
-  j.value=""; t.value="";
-  alert("Sastra berhasil di-post!");
-}
-
-function uploadFoto(e){
-  let file = e.target.files[0]; if(!file) return;
-  let reader = new FileReader(); 
-  reader.onload = function(event) { masukkanKeGaleri(event.target.result); alert("Foto masuk ke Galeri!"); };
-  reader.readAsDataURL(file);
-}
-
-function addTimeline(){
-  let foto = document.getElementById("fotoTL"); let tanggal = document.getElementById("tgl");
-  let tempat = document.getElementById("tempat"); let deskripsi = document.getElementById("desc");
-  let file = foto.files[0]; if(!file || !tanggal.value || !tempat.value || !deskripsi.value) return alert("Lengkapi data timeline!");
-  let reader = new FileReader();
-  reader.onload = function(e) {
-    let div = document.createElement("div"); div.className="item";
-    div.innerHTML = "<img src='" + e.target.result + "'><br><b>" + tanggal.value + "</b><p style='margin:5px 0;'>📍 " + tempat.value + "</p><small>" + deskripsi.value + "</small>";
-    document.getElementById("timelineList").prepend(div);
-    localStorage.setItem("timelineHTML", document.getElementById("timelineList").innerHTML);
-    masukkanKeGaleri(e.target.result); 
-    tanggal.value=""; tempat.value=""; deskripsi.value=""; foto.value="";
-    alert("Timeline sukses ter-upload!");
-  };
-  reader.readAsDataURL(file);
-}
 </script>
 </body>
-</html>
+      </html>
+      
